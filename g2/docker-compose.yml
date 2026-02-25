@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  g2:
+    image: g2-gateway:2.0
+    container_name: g2
+
+    restart: always
+
+    depends_on:
+      - redis
+      
+    ports:
+      - "9990:9990"
+      - "10000:10000"
+
+    volumes:
+      - ./src:/app
+      - /app/node_modules
+
+    environment:
+      PG_HOST: payesh_postgres
+      PG_PORT: 5432
+      PG_USER: postgres
+      PG_PASS: 1032397@
+      PG_DB: gita_gateway_db
+      TYPE: SINGLE_ROLE
+      APP_NAME: payesh
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      GSE_ADDRESS: http://gita-server-engine:8080/GitaServerEngine/RequestManager
+      MINIO_ENDPOINT_BUCKET: http://localhost:9000/speclib
+      DOMAIN: localhost
+      ORIGIN: localhost
+      TRUSTED_DOMAIN_LIST_1: localhost:9990
+      TRUSTED_DOMAIN_LIST_2: localhost:9990
+      TRUSTED_DOMAIN_LIST_3: localhost
+      APM_SERVICE_NAME: GitaGateway
+      APM_SECRET_TOKEN: PjUpEavFuB8HK40ZTvOAYcFIXYX5s8ajVJ286Hdx7gDgvxGDD8StawG8gjJ8q21k \
+      APM_SERVER_URL: https://elastic.underconst.ir:8297 \
+
+    networks:
+      - gita-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: nazer_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - gita-net
+
+networks:
+  gita-net:
+    external: true

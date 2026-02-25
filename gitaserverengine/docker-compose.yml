@@ -1,0 +1,30 @@
+services:
+  payesh_postgres:
+    image: postgis/postgis:15-3.4
+    container_name: payesh_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: gita_engdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1032397@
+    volumes:
+      - ./pgdata_new:/var/lib/postgresql/data
+    networks:
+      - gita-net
+
+  gita-server-engine:
+    image: gse:2.1
+    container_name: gita-server-engine
+    depends_on:
+      - payesh_postgres
+    volumes:
+      - ./gse/GitaServerEngine:/usr/local/tomcat/webapps/GitaServerEngine
+      - ./files:/u01/files
+    ports:
+      - "8080:8080"
+    networks:
+      - gita-net
+
+networks:
+  gita-net:
+    external: true

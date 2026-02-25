@@ -1,0 +1,19 @@
+# ignore everything
+*
+
+# allow folders
+!g2/
+!gitaserverengine/
+
+# ignore everything inside folders
+g2/*
+gitaserverengine/*
+
+# allow only docker files
+!g2/docker-compose.yml
+!g2/Dockerfile
+!gitaserverengine/docker-compose.yml
+!gitaserverengine/Dockerfile
+
+# allow gitignore itself
+!.gitignore
