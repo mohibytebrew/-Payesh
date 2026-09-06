@@ -22,7 +22,7 @@ services:
       PG_HOST: payesh_postgres
       PG_PORT: 5432
       PG_USER: postgres
-      PG_PASS: 1032397@
+      PG_PASS: 10327@
       PG_DB: gita_gateway_db
       TYPE: SINGLE_ROLE
       APP_NAME: payesh
