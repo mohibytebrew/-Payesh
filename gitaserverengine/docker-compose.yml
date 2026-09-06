@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: gita_engdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1032397@
+      POSTGRES_PASSWORD: 10327@
     volumes:
       - ./pgdata_new:/var/lib/postgresql/data
     networks:
